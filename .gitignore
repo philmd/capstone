@@ -105,6 +105,9 @@ test_arm_regression.o
 fuzz_harness
 test_iter_benchmark
 
+# coccinelle/spatch
+*.ast_raw
+*.depend_raw
 
 *.s
 .DS_Store
