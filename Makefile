@@ -254,8 +254,8 @@ PKGCFGDIR ?= $(LIBDATADIR)/pkgconfig
 API_MAJOR=$(shell echo `grep -e CS_API_MAJOR include/capstone.h | grep -v = | awk '{print $$3}'` | awk '{print $$1}')
 VERSION_EXT =
 
-IS_APPLE := $(shell $(CC) -dM -E - < /dev/null | grep -cm 1 -e __apple_build_version__ -e __APPLE_CC__)
-ifeq ($(IS_APPLE),1)
+IS_APPLE := $(shell $(CC) -dM -E - < /dev/null | grep -c -e __apple_build_version__ -e __APPLE_CC__ | head -1)
+ifneq ($(IS_APPLE),0)
 # on MacOS, compile in Universal format by default
 MACOS_UNIVERSAL ?= yes
 ifeq ($(MACOS_UNIVERSAL),yes)
